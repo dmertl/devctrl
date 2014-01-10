@@ -33,13 +33,19 @@ function buildPortCommand() {
 	fi
 }
 
-if [[ "$2" == "apache" || "$2" == "mysql" || "$2" == "all" ]]
+if [[ ("$1" == "start" || "$1" == "stop" || "$1" == "restart") && ("$2" == "apache" || "$2" == "mysql" || "$2" == "all") ]]
 then
 	# Run macports command
 	action=$(getPortAction "$1")
 	service=$(getPortService "$2")
 	cmd=$(buildPortCommand "$action" "$service")
 	`$cmd`
+elif [[ "$1" == "update" ]]
+then
+	if [[ "$2" == "all" ]]
+	then
+		`sudo port selfupdate; sudo port upgrade outdated; sudo pear upgrade; sudo gem update`
+	fi
 elif [[ "$2" == "xdebug" ]]
 then
 	if [[ "$1" == "enable" ]]

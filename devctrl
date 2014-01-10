@@ -1,7 +1,3 @@
-echo "0: $0"
-echo "1: $1"
-echo "1: $2"
-
 services_apache="apache2"
 services_mysql="mysql5"
 
